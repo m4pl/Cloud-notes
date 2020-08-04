@@ -21,13 +21,13 @@ class MainViewModel(private val prefs: Prefs) : ViewModel() {
     private val subject = PublishSubject.create<String>()
 
     init {
-        subject.subscribe { string ->
+        disposables.add(subject.subscribe { string ->
             textState.update {
                 it.copy(
                     text = string
                 )
             }
-        }
+        })
     }
 
     fun openNoteFragment() {
